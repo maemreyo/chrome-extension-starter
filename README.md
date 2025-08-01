@@ -22,28 +22,77 @@ A modern, clean architecture template for Chrome extensions with TypeScript, Rea
 🔐 **License Validation** - Secure feature gating and usage tracking
 📊 **Usage Analytics** - Real-time usage monitoring and limits
 
-## Quick Start
+## 🚀 Quick Start
 
-1. **Clone the template:**
+### For New Developers (Recommended)
+
+Use our **interactive setup wizard** for guided onboarding:
+
+```bash
+# Clone the template
+git clone <your-repo-url> my-extension
+cd my-extension
+
+# Run the interactive setup wizard
+node scripts/setup.js
+# This will guide you through:
+# - Project configuration (name, description, author)
+# - AI provider selection (OpenAI, Anthropic, Custom)
+# - Payment system setup (optional)
+# - Analytics configuration (optional)
+# - Environment setup and dependency installation
+```
+
+The setup wizard automatically:
+- ✅ Validates system requirements (Node.js 18+, Chrome browser)
+- 🎯 Generates personalized configuration files
+- 📁 Creates `.env` with your API keys
+- 📦 Installs dependencies with your preferred package manager
+- 🔧 Runs code quality checks
+- 🏗️ Builds the extension for development
+
+### Manual Setup (Advanced)
+
+1. **Clone and install:**
    ```bash
    git clone <your-repo-url> my-extension
    cd my-extension
-   ```
-
-2. **Install dependencies:**
-   ```bash
    pnpm install
    ```
 
-3. **Build the extension:**
+2. **Configure environment:**
+   ```bash
+   # Copy environment template
+   cp .env.example .env
+   
+   # Edit with your API keys
+   nano .env
+   ```
+
+3. **Build and load:**
    ```bash
    pnpm build
    ```
 
 4. **Load in Chrome:**
-   - Open Chrome and navigate to `chrome://extensions/`
+   - Open Chrome → `chrome://extensions/`
    - Enable "Developer mode"
-   - Click "Load unpacked" and select the `dist` folder
+   - Click "Load unpacked" → select the `build` folder
+
+### Development Scripts
+
+After setup, use these automation tools:
+
+```bash
+# Interactive development menu
+node scripts/dev-workflow.js
+
+# Advanced configuration wizard  
+node scripts/configure.js
+
+# Deployment automation
+node scripts/deploy.js
+```
 
 ## Project Structure
 
@@ -150,13 +199,46 @@ interface FeatureData {
 
 ## Development
 
-### Available Scripts
+### Development Automation Scripts
 
+The starter includes comprehensive automation scripts for professional development workflows:
+
+#### 🛠 Core Scripts
 - `pnpm dev` - Start development with hot reload
-- `pnpm build` - Build for production
+- `pnpm build` - Build for production  
 - `pnpm lint` - Run ESLint
-- `pnpm type-check` - Run TypeScript checks
-- `pnpm test` - Run tests (when implemented)
+- `pnpm typecheck` - Run TypeScript checks
+- `pnpm test` - Run tests
+- `pnpm package` - Create distributable ZIP
+
+#### 🚀 Onboarding & Setup Scripts
+- `node scripts/setup.js` - **Interactive setup wizard** for new developers
+- `node scripts/configure.js` - **Advanced configuration** for AI, payments, analytics
+- `pnpm run setup` - Shortcut for setup script
+
+#### 🔧 Development Workflow Scripts  
+- `node scripts/dev-workflow.js` - **Interactive development menu** with:
+  - Code validation (TypeScript, ESLint, tests)
+  - Build automation with validation
+  - Development server management
+  - Test execution with coverage
+  - Codebase analysis and metrics
+  - Project cleanup utilities
+
+#### 🚀 Deployment Scripts
+- `node scripts/deploy.js` - **Complete deployment automation** with:
+  - Multi-environment builds (dev, staging, production)
+  - Pre-deployment validation checks
+  - Distribution package creation with checksums
+  - Store upload preparation (Chrome, Edge, Firefox)
+  - Deployment reporting and documentation
+
+#### 🎯 Script Benefits
+- **Interactive Wizards**: Guided setup with intelligent defaults
+- **Comprehensive Validation**: System requirements, code quality, pre-deployment checks
+- **Automation**: Reduce manual tasks and human error
+- **Professional Workflows**: Enterprise-grade development processes
+- **Multi-environment**: Support for development, staging, and production deployments
 
 ### Environment Setup
 
@@ -490,12 +572,30 @@ export const FEATURE_FLAGS = {
 
 MIT License - see LICENSE file for details.
 
-## Support
+## 📚 Documentation & Support
 
+### 📖 Getting Started
+- 🚀 [**Onboarding Guide**](./docs/onboarding-guide.md) - Complete setup and customization guide
+- ⚡ [**Quick Reference**](./docs/quick-reference.md) - Commands, patterns, and common tasks
+- 🛠 [**Scripts Documentation**](./scripts/README.md) - Automation scripts reference
+
+### 🏗️ Architecture & Design
+- 🏛️ [Chrome Extension Architecture](./docs/chrome-extension-architecture-patterns.md)
+- 🔧 [Separation of Concerns Guide](./docs/separation-of-concerns-guide.md)
+- 🌐 [CORS Handling Strategies](./docs/cors-handling-strategies.md)
+- 🔒 [Security & Authentication Patterns](./docs/authentication-security-patterns.md)
+- 🏗️ [Backend Architecture Guide](./docs/backend-architecture-guide.md)
+
+### 🚀 Advanced Topics
+- 📊 [Data Synchronization Patterns](./docs/data-synchronization-patterns.md)
+- 🚀 [Deployment & Scaling Strategies](./docs/deployment-scaling-strategies.md)
+- 💡 [Development Best Practices](./docs/development-best-practices.md)
+
+### 🆘 Support Channels
 - 📖 [Chrome Extension Documentation](https://developer.chrome.com/docs/extensions/)
-- 🏗️ [Architecture Patterns](./docs/architecture-patterns.md)
-- 🔧 [API Reference](./docs/api-reference.md)
 - 🐛 [Issue Tracker](https://github.com/your-repo/issues)
+- 💬 [GitHub Discussions](https://github.com/your-repo/discussions)
+- 📧 [Email Support](mailto:support@yourextension.com)
 
 ---
 
