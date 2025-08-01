@@ -287,10 +287,10 @@ export const useAIStore = create<AIState>()(
             ])
 
             set({
-              providers: providers || get().providers,
-              conversations: conversations || [],
-              processingHistory: history || [],
-              enabledFeatures: enabledFeatures || get().enabledFeatures
+              providers: (typeof providers === 'string' ? JSON.parse(providers) : providers) || get().providers,
+              conversations: (typeof conversations === 'string' ? JSON.parse(conversations) : conversations) || [],
+              processingHistory: (typeof history === 'string' ? JSON.parse(history) : history) || [],
+              enabledFeatures: (typeof enabledFeatures === 'string' ? JSON.parse(enabledFeatures) : enabledFeatures) || get().enabledFeatures
             })
           } catch (error) {
             console.error('Failed to load AI data from storage:', error)

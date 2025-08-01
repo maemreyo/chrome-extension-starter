@@ -15,19 +15,19 @@ const featureDataSchema = z.object({
 })
 
 const apiRequestSchema = z.object({
-  url: z.string().url().optional(),
+  url: z.string().url("Invalid URL").optional(),
   method: z.enum(['GET', 'POST', 'PUT', 'DELETE']).optional(),
   headers: z.record(z.string()).optional(),
   body: z.any().optional()
 })
 
 // Main validation functions
-export function validateInput(data: unknown): ValidationResult {
+export function validateInput(data: unknown, context?: any): ValidationResult {
   try {
     const validated = featureDataSchema.parse(data)
     
     // Additional business logic validation
-    if (containsSuspiciousContent(validated.input)) {
+    if (containsSuspiciousContent(validated.input, context)) {
       return {
         isValid: false,
         error: 'Input contains suspicious content'
@@ -42,8 +42,8 @@ export function validateInput(data: unknown): ValidationResult {
     if (error instanceof z.ZodError) {
       return {
         isValid: false,
-        error: error.errors[0]?.message || 'Invalid input format',
-        details: error.errors
+        error: error.issues[0]?.message || 'Invalid input format',
+        details: error.issues
       }
     }
 
@@ -99,8 +99,8 @@ export function validateApiRequest(endpoint: string, data: any): ValidationResul
     if (error instanceof z.ZodError) {
       return {
         isValid: false,
-        error: error.errors[0]?.message || 'Invalid API request format',
-        details: error.errors
+        error: error.issues[0]?.message || 'Invalid API request format',
+        details: error.issues
       }
     }
 
@@ -228,7 +228,7 @@ export function sanitizeFilename(filename: string): string {
 }
 
 // Helper validation functions
-function containsSuspiciousContent(text: string): boolean {
+function containsSuspiciousContent(text: string, context?: any): boolean {
   const suspiciousPatterns = [
     /<script/i,
     /javascript:/i,
@@ -339,8 +339,8 @@ export function createValidator<T>(schema: z.ZodSchema<T>) {
       if (error instanceof z.ZodError) {
         return {
           isValid: false,
-          error: error.errors[0]?.message || 'Validation failed',
-          details: error.errors
+          error: error.issues[0]?.message || 'Validation failed',
+          details: error.issues
         }
       }
 

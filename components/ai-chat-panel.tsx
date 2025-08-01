@@ -158,7 +158,7 @@ export const AIChatPanel: React.FC<AIChatPanelProps> = ({
               <div 
                 className="prose dark:prose-invert max-w-none"
                 dangerouslySetInnerHTML={{ 
-                  __html: marked(message.content) 
+                  __html: String(typeof marked.parse === 'function' ? marked.parse(message.content) : marked(message.content))
                 }}
               />
             ) : (

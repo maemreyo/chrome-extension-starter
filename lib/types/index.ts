@@ -360,9 +360,9 @@ export interface AIConfig {
   apiKey: string
   model: string
   baseUrl?: string
-  maxTokens?: number
-  temperature?: number
-  stream?: boolean
+  maxTokens: number
+  temperature: number
+  stream: boolean
 }
 
 export interface AIConversation {

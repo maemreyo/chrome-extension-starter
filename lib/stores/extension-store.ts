@@ -4,6 +4,7 @@
 import { create } from 'zustand'
 import { devtools, persist } from 'zustand/middleware'
 import { Storage } from '@plasmohq/storage'
+import { useEffect } from 'react'
 import type { 
   ExtensionConfig, 
   UserPreferences, 
@@ -158,8 +159,8 @@ export const useExtensionStore = create<ExtensionState>()(
             ])
 
             set({
-              preferences: preferences || get().preferences,
-              processingHistory: history || [],
+              preferences: (typeof preferences === 'string' ? JSON.parse(preferences) : preferences) || get().preferences,
+              processingHistory: (typeof history === 'string' ? JSON.parse(history) : history) || [],
               isConfigLoading: false
             })
           } catch (error) {
@@ -244,23 +245,18 @@ export const useStorageSync = () => {
   const { loadFromStorage, saveToStorage } = useExtensionActions()
   
   // Load on mount
-  React.useEffect(() => {
+  useEffect(() => {
     loadFromStorage()
   }, [loadFromStorage])
 
   // Auto-save on changes
-  React.useEffect(() => {
+  useEffect(() => {
     const unsubscribe = useExtensionStore.subscribe(
-      (state) => ({ 
-        preferences: state.preferences, 
-        history: state.processingHistory 
-      }),
       () => {
         // Debounce saves
         const timeoutId = setTimeout(saveToStorage, 1000)
         return () => clearTimeout(timeoutId)
-      },
-      { equalityFn: (a, b) => JSON.stringify(a) === JSON.stringify(b) }
+      }
     )
 
     return unsubscribe

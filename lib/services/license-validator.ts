@@ -2,7 +2,7 @@
 // Cryptographic validation for secure feature gating
 
 import { Storage } from '@plasmohq/storage'
-import jwtDecode from 'jwt-decode'
+import { jwtDecode } from 'jwt-decode'
 import type { License, FeatureAccess, PaymentError } from '../types/payment-types'
 
 export class LicenseValidator {
@@ -136,27 +136,27 @@ export class LicenseValidator {
       case 'ai_requests':
         limit = limits.aiRequests
         used = usage?.aiRequests || 0
-        hasAccess = limit === -1 || used < limit
+        hasAccess = limit === -1 || (used !== undefined && used < limit)
         resetDate = this.getNextResetDate()
         break
 
       case 'conversations':
         limit = limits.conversations
         used = usage?.conversations || 0
-        hasAccess = limit === -1 || used < limit
+        hasAccess = limit === -1 || (used !== undefined && used < limit)
         break
 
       case 'file_uploads':
         limit = limits.fileUploads
         used = usage?.features?.file_uploads || 0
-        hasAccess = limit === -1 || used < limit
+        hasAccess = limit === -1 || (used !== undefined && used < limit)
         resetDate = this.getNextResetDate()
         break
 
       case 'custom_prompts':
         limit = limits.customPrompts
         used = usage?.features?.custom_prompts || 0
-        hasAccess = limit === -1 || used < limit
+        hasAccess = limit === -1 || (used !== undefined && used < limit)
         break
 
       case 'priority_support':
@@ -210,8 +210,8 @@ export class LicenseValidator {
       const license = await this.storage.get('license')
       if (!license) return null
 
-      const validation = await this.validateLicense(license)
-      return validation.isValid ? validation.license! : null
+      const validation = await this.validateLicense(license as unknown as License)
+      return validation.isValid ? (validation.license as License) : null
     } catch {
       return null
     }

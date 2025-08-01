@@ -29,7 +29,7 @@ export class ApiService extends BaseService {
             options: data.options || {}
           }),
           headers: {
-            'Authorization': this.config.apiKey ? `Bearer ${this.config.apiKey}` : undefined,
+            ...(this.config.apiKey && { 'Authorization': `Bearer ${this.config.apiKey}` }),
             'X-Client-Version': '1.0.0'
           }
         },

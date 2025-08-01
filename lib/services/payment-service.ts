@@ -4,7 +4,7 @@
 import { ImprovedBaseService } from './improved-base-service'
 import { Storage } from '@plasmohq/storage'
 import { v4 as uuidv4 } from 'uuid'
-import jwtDecode from 'jwt-decode'
+import { jwtDecode } from 'jwt-decode'
 import type {
   User,
   Subscription,
@@ -32,7 +32,7 @@ import type {
 export class PaymentService extends ImprovedBaseService {
   private storage: Storage
   private apiKey: string | null = null
-  private baseUrl: string
+  declare protected baseUrl: string
 
   constructor(config: {
     apiKey?: string
@@ -83,7 +83,7 @@ export class PaymentService extends ImprovedBaseService {
         // Validate token is still valid
         const token = await this.storage.get('auth_token')
         if (token && !this.isTokenExpired(token)) {
-          return cachedUser
+          return cachedUser as unknown as User
         }
       }
 
@@ -241,8 +241,8 @@ export class PaymentService extends ImprovedBaseService {
     try {
       const cachedLicense = await this.storage.get('license')
       
-      if (cachedLicense && this.isLicenseValid(cachedLicense)) {
-        return cachedLicense
+      if (cachedLicense && this.isLicenseValid(cachedLicense as unknown as License)) {
+        return cachedLicense as unknown as License
       }
 
       // Fetch fresh license from API

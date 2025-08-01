@@ -54,7 +54,7 @@ export function withFeatureGate<P extends object>(
               This feature requires a premium subscription
             </p>
             <button
-              onClick={showUpgrade}
+              onClick={() => showUpgrade()}
               className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors text-sm font-medium"
             >
               Upgrade Now
@@ -108,7 +108,7 @@ export const FeatureGate: React.FC<FeatureGateProps> = ({
             Unlock this feature with a premium subscription
           </p>
           <button
-            onClick={showUpgrade}
+            onClick={() => showUpgrade()}
             className="px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg hover:from-blue-600 hover:to-purple-700 transition-colors text-sm font-medium"
           >
             Upgrade Now
@@ -155,7 +155,7 @@ export const UsageLimitGate: React.FC<UsageLimitGateProps> = ({
             You've reached your monthly limit for this feature
           </p>
           <button
-            onClick={showUpgrade}
+            onClick={() => showUpgrade()}
             className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors text-sm font-medium"
           >
             Upgrade for More Usage
@@ -177,7 +177,7 @@ export const UsageLimitGate: React.FC<UsageLimitGateProps> = ({
               </span>
             </div>
             <button
-              onClick={showUpgrade}
+              onClick={() => showUpgrade()}
               className="text-yellow-700 dark:text-yellow-300 hover:text-yellow-900 dark:hover:text-yellow-100 text-sm font-medium underline"
             >
               Upgrade
@@ -201,7 +201,7 @@ export const UsageLimitGate: React.FC<UsageLimitGateProps> = ({
             This feature is not included in your current plan
           </p>
           <button
-            onClick={showUpgrade}
+            onClick={() => showUpgrade()}
             className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors text-sm font-medium"
           >
             View Plans
@@ -253,7 +253,7 @@ export const PlanGate: React.FC<PlanGateProps> = ({
             This feature requires the {Array.isArray(requiredPlan) ? requiredPlan.join(' or ') : requiredPlan} plan
           </p>
           <button
-            onClick={showUpgrade}
+            onClick={() => showUpgrade()}
             className="px-4 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition-colors text-sm font-medium"
           >
             Upgrade Plan
@@ -296,7 +296,7 @@ export const TrialWarning: React.FC<{ className?: string }> = ({ className = '' 
           </div>
         </div>
         <button
-          onClick={showUpgrade}
+          onClick={() => showUpgrade()}
           className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors text-sm font-medium"
         >
           Subscribe Now
