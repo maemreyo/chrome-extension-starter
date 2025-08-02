@@ -424,6 +424,144 @@ export type Environment = 'development' | 'staging' | 'production'
 export type MessageType = 'PROCESS_FEATURE' | 'API_CALL' | 'STORAGE_OPERATION' | 'OPEN_SIDE_PANEL' | 'AI_CHAT' | 'AI_PROCESS' | string
 export type ErrorCode = 'UNKNOWN_ERROR' | 'VALIDATION_ERROR' | 'API_ERROR' | 'STORAGE_ERROR' | 'AI_ERROR' | string
 export type LogLevel = 'debug' | 'info' | 'warn' | 'error'
+// Logger Service Types
+export interface LogEntry {
+  id: string
+  timestamp: number
+  level: LogLevel
+  message: string
+  context?: string
+  data?: any
+  source?: 'background' | 'content' | 'popup' | 'sidepanel' | 'options'
+  userId?: string
+  sessionId?: string
+}
+
+export interface LoggerConfig {
+  enabled: boolean
+  level: LogLevel
+  maxEntries: number
+  persistToDisk: boolean
+  includeStackTrace: boolean
+  enableConsole: boolean
+}
+
+// Error Service Types
+export interface ErrorReport {
+  id: string
+  timestamp: number
+  message: string
+  stack?: string
+  context?: string
+  source?: 'background' | 'content' | 'popup' | 'sidepanel' | 'options'
+  severity: 'low' | 'medium' | 'high' | 'critical'
+  userAgent?: string
+  url?: string
+  userId?: string
+  sessionId?: string
+  data?: any
+  resolved?: boolean
+  reportedToServer?: boolean
+}
+
+export interface ErrorServiceConfig {
+  enabled: boolean
+  reportToServer: boolean
+  maxReports: number
+  serverEndpoint?: string
+  enableAutoReporting: boolean
+  criticalErrorThreshold: number
+}
+
+// Notification Service Types
+export interface ChromeNotificationData {
+  id: string
+  title: string
+  message: string
+  type: 'basic' | 'image' | 'list' | 'progress'
+  priority: 'low' | 'normal' | 'high' | 'critical'
+  iconUrl?: string
+  imageUrl?: string
+  items?: Array<{ title: string; message: string }>
+  progress?: number
+  buttons?: Array<{ title: string; action: string }>
+  timestamp: number
+  persistent?: boolean
+  silent?: boolean
+  requireInteraction?: boolean
+  contextMessage?: string
+  eventTime?: number
+  tag?: string
+  data?: any
+}
+
+export interface NotificationConfig {
+  enabled: boolean
+  showInBrowser: boolean
+  playSound: boolean
+  showBadge: boolean
+  maxNotifications: number
+  defaultIcon: string
+  autoCloseDelay: number
+  enableActionButtons: boolean
+}
+
+export interface NotificationHistory {
+  id: string
+  notification: ChromeNotificationData
+  shown: boolean
+  clicked: boolean
+  dismissed: boolean
+  buttonClicked?: string
+  shownAt?: number
+  clickedAt?: number
+  dismissedAt?: number
+}
+
+// Update Service Types
+export interface UpdateInfo {
+  version: string
+  releaseNotes: string
+  downloadUrl: string
+  checksum?: string
+  size?: number
+  releaseDate: string
+  critical: boolean
+  minimumVersion?: string
+  features?: string[]
+  bugFixes?: string[]
+  breakingChanges?: string[]
+}
+
+export interface UpdateCheckResult {
+  hasUpdate: boolean
+  currentVersion: string
+  latestVersion?: string
+  updateInfo?: UpdateInfo
+  isForced?: boolean
+  downloadProgress?: number
+}
+
+export interface UpdateServiceConfig {
+  enabled: boolean
+  checkOnStartup: boolean
+  autoDownload: boolean
+  autoInstall: boolean
+  checkInterval: number
+  updateEndpoint: string
+  notifyUser: boolean
+  allowBetaUpdates: boolean
+  forceUpdates: boolean
+}
+
+export interface UpdateHistory {
+  version: string
+  installedAt: number
+  previousVersion?: string
+  source: 'auto' | 'manual' | 'forced'
+  success: boolean
+  errorMessage?: string
+}
 export type CacheStrategy = 'memory-only' | 'storage-only' | 'hybrid'
 export type AIProvider = 'openai' | 'anthropic' | 'custom'
 export type AICapability = 'text-generation' | 'text-analysis' | 'summarization' | 'translation' | 'code-generation' | 'function-calling' | 'long-context' | 'reasoning'

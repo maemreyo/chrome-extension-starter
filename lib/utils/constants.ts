@@ -20,7 +20,10 @@ export const STORAGE_KEYS = {
   CACHE_CONFIG: 'cache_config',
   RATE_LIMIT_DATA: 'rate_limit_data',
   FEATURE_FLAGS: 'feature_flags',
-  LAST_SYNC: 'last_sync_timestamp'
+  LAST_SYNC: 'last_sync_timestamp',
+  LOGS: 'system_logs',
+  ERROR_REPORTS: 'error_reports',
+  NOTIFICATIONS: 'notifications_config'
 } as const
 
 export const ERROR_CODES = {

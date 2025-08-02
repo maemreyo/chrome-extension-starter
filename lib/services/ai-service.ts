@@ -1,17 +1,15 @@
 // AI Service - Universal AI integration with multiple providers
 // Supports OpenAI, Anthropic Claude, and other AI services
 
-import { ImprovedBaseService } from './improved-base-service'
-import OpenAI from 'openai'
 import Anthropic from '@anthropic-ai/sdk'
+import OpenAI from 'openai'
 import { z } from 'zod'
-import type { 
-  AIProvider, 
-  AIRequest, 
-  AIResponse, 
-  ChatMessage,
-  AICapability 
+import type {
+  AICapability,
+  AIResponse,
+  ChatMessage
 } from '../types'
+import { ImprovedBaseService } from './improved-base-service'
 
 // AI Configuration Schema
 const aiConfigSchema = z.object({

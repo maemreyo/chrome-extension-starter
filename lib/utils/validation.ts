@@ -17,7 +17,7 @@ const featureDataSchema = z.object({
 const apiRequestSchema = z.object({
   url: z.string().url("Invalid URL").optional(),
   method: z.enum(['GET', 'POST', 'PUT', 'DELETE']).optional(),
-  headers: z.record(z.string()).optional(),
+  headers: z.record(z.string(), z.string()).optional(),
   body: z.any().optional()
 })
 
