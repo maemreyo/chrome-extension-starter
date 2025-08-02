@@ -1,6 +1,6 @@
-import { logger } from './logger-service'
-import { errorService } from './error-service'
 import { STORAGE_KEYS } from '../utils/constants'
+import { errorService } from './error-service'
+import { logger } from './logger-service'
 
 export interface ChromeNotificationData {
   id: string
