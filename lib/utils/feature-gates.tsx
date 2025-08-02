@@ -2,7 +2,7 @@
 // Higher-order components and hooks for feature gating
 
 import React from 'react'
-import { usePaymentStore, usePaymentActions } from '../stores/payment-store'
+import { usePaymentActions, usePaymentStore } from '../stores/payment-store'
 import type { FeatureAccess } from '../types/payment-types'
 
 // Feature gate hook

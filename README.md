@@ -1,26 +1,27 @@
 # Chrome Extension Starter Template
 
-A modern, clean architecture template for Chrome extensions with TypeScript, React, and best practices for scalable development.
+A modern, clean architecture template for Chrome extensions with TypeScript,
+React, and best practices for scalable development.
 
 ## Features
 
-✨ **Clean Architecture** - Separation of concerns with proper layering
-🔒 **Security First** - Input validation, sanitization, and secure practices
-⚡ **Modern Stack** - TypeScript, React, and latest Chrome APIs
-🎨 **Beautiful UI** - Modern, responsive interface with dark mode support
-🔄 **Background Processing** - Efficient message routing and service layers
-💾 **Smart Caching** - Intelligent caching with TTL and memory management
-🛡️ **Rate Limiting** - Built-in protection against API abuse
-🧪 **Type Safe** - Comprehensive TypeScript definitions
-📱 **Multi-UI** - Popup, side panel, and options page interfaces
-🎯 **Content Scripts** - Text selection and page interaction
-🤖 **AI Integration** - Built-in support for OpenAI, Anthropic Claude, and custom AI providers
-🚀 **Professional Libraries** - Uses battle-tested libraries (ky, zustand, date-fns, zod)
-⚡ **State Management** - Zustand-based stores with automatic persistence
-🎛️ **Quick Actions** - Instant AI processing for selected text
-💰 **Monetization Ready** - Complete payment system with Stripe integration
-🔐 **License Validation** - Secure feature gating and usage tracking
-📊 **Usage Analytics** - Real-time usage monitoring and limits
+✨ **Clean Architecture** - Separation of concerns with proper layering 🔒
+**Security First** - Input validation, sanitization, and secure practices ⚡
+**Modern Stack** - TypeScript, React, and latest Chrome APIs 🎨 **Beautiful
+UI** - Modern, responsive interface with dark mode support 🔄 **Background
+Processing** - Efficient message routing and service layers 💾 **Smart
+Caching** - Intelligent caching with TTL and memory management 🛡️ **Rate
+Limiting** - Built-in protection against API abuse 🧪 **Type Safe** -
+Comprehensive TypeScript definitions 📱 **Multi-UI** - Popup, side panel, and
+options page interfaces 🎯 **Content Scripts** - Text selection and page
+interaction 🤖 **AI Integration** - Built-in support for OpenAI, Anthropic
+Claude, and custom AI providers 🚀 **Professional Libraries** - Uses
+battle-tested libraries (ky, zustand, date-fns, zod) ⚡ **State Management** -
+Zustand-based stores with automatic persistence 🎛️ **Quick Actions** - Instant
+AI processing for selected text 💰 **Monetization Ready** - Complete payment
+system with Stripe integration 🔐 **License Validation** - Secure feature gating
+and usage tracking 📊 **Usage Analytics** - Real-time usage monitoring and
+limits
 
 ## 🚀 Quick Start
 
@@ -44,6 +45,7 @@ node scripts/setup.js
 ```
 
 The setup wizard automatically:
+
 - ✅ Validates system requirements (Node.js 18+, Chrome browser)
 - 🎯 Generates personalized configuration files
 - 📁 Creates `.env` with your API keys
@@ -54,6 +56,7 @@ The setup wizard automatically:
 ### Manual Setup (Advanced)
 
 1. **Clone and install:**
+
    ```bash
    git clone <your-repo-url> my-extension
    cd my-extension
@@ -61,15 +64,17 @@ The setup wizard automatically:
    ```
 
 2. **Configure environment:**
+
    ```bash
    # Copy environment template
    cp .env.example .env
-   
+
    # Edit with your API keys
    nano .env
    ```
 
 3. **Build and load:**
+
    ```bash
    pnpm build
    ```
@@ -87,7 +92,7 @@ After setup, use these automation tools:
 # Interactive development menu
 node scripts/dev-workflow.js
 
-# Advanced configuration wizard  
+# Advanced configuration wizard
 node scripts/configure.js
 
 # Deployment automation
@@ -154,16 +159,18 @@ chrome-extension-starter/
 ## Architecture Principles
 
 ### 1. Background Script = Router Only
-The background script acts purely as a message router, delegating all business logic to specialized handlers:
+
+The background script acts purely as a message router, delegating all business
+logic to specialized handlers:
 
 ```typescript
 // background.ts - Clean routing only
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   switch (message.type) {
-    case "PROCESS_FEATURE":
+    case 'PROCESS_FEATURE':
       handleFeatureMessage(message.data, sendResponse)
       return true
-    case "API_CALL":
+    case 'API_CALL':
       handleApiMessage(message.endpoint, message.data, sendResponse)
       return true
   }
@@ -171,6 +178,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 ```
 
 ### 2. Service Layer Separation
+
 Business logic lives in services, not in Chrome API handlers:
 
 ```typescript
@@ -185,6 +193,7 @@ export class ApiService extends BaseService {
 ```
 
 ### 3. Type-Safe Communication
+
 All messages between components use strictly typed interfaces:
 
 ```typescript
@@ -201,22 +210,27 @@ interface FeatureData {
 
 ### Development Automation Scripts
 
-The starter includes comprehensive automation scripts for professional development workflows:
+The starter includes comprehensive automation scripts for professional
+development workflows:
 
 #### 🛠 Core Scripts
+
 - `pnpm dev` - Start development with hot reload
-- `pnpm build` - Build for production  
+- `pnpm build` - Build for production
 - `pnpm lint` - Run ESLint
 - `pnpm typecheck` - Run TypeScript checks
 - `pnpm test` - Run tests
 - `pnpm package` - Create distributable ZIP
 
 #### 🚀 Onboarding & Setup Scripts
+
 - `node scripts/setup.js` - **Interactive setup wizard** for new developers
-- `node scripts/configure.js` - **Advanced configuration** for AI, payments, analytics
+- `node scripts/configure.js` - **Advanced configuration** for AI, payments,
+  analytics
 - `pnpm run setup` - Shortcut for setup script
 
-#### 🔧 Development Workflow Scripts  
+#### 🔧 Development Workflow Scripts
+
 - `node scripts/dev-workflow.js` - **Interactive development menu** with:
   - Code validation (TypeScript, ESLint, tests)
   - Build automation with validation
@@ -226,6 +240,7 @@ The starter includes comprehensive automation scripts for professional developme
   - Project cleanup utilities
 
 #### 🚀 Deployment Scripts
+
 - `node scripts/deploy.js` - **Complete deployment automation** with:
   - Multi-environment builds (dev, staging, production)
   - Pre-deployment validation checks
@@ -234,11 +249,14 @@ The starter includes comprehensive automation scripts for professional developme
   - Deployment reporting and documentation
 
 #### 🎯 Script Benefits
+
 - **Interactive Wizards**: Guided setup with intelligent defaults
-- **Comprehensive Validation**: System requirements, code quality, pre-deployment checks
+- **Comprehensive Validation**: System requirements, code quality,
+  pre-deployment checks
 - **Automation**: Reduce manual tasks and human error
 - **Professional Workflows**: Enterprise-grade development processes
-- **Multi-environment**: Support for development, staging, and production deployments
+- **Multi-environment**: Support for development, staging, and production
+  deployments
 
 ### Environment Setup
 
@@ -256,6 +274,7 @@ The starter includes comprehensive automation scripts for professional developme
 ## Configuration
 
 ### Manifest V3 Configuration
+
 The extension uses Manifest V3 with proper permissions:
 
 ```json
@@ -270,6 +289,7 @@ The extension uses Manifest V3 with proper permissions:
 ```
 
 ### API Configuration
+
 Configure external APIs in the options page or modify constants:
 
 ```typescript
@@ -283,6 +303,7 @@ export const API_ENDPOINTS = {
 ## Usage Examples
 
 ### AI Integration
+
 ```typescript
 // Using AI service directly
 import { AIService } from './lib/services/ai-service'
@@ -293,11 +314,12 @@ const aiService = new AIService({
   model: 'gpt-4o-mini'
 })
 
-const summary = await aiService.summarizeText("Long text here...", 200)
-const translation = await aiService.translateText("Hello", "Spanish")
+const summary = await aiService.summarizeText('Long text here...', 200)
+const translation = await aiService.translateText('Hello', 'Spanish')
 ```
 
 ### State Management with Zustand
+
 ```typescript
 // Using stores in components
 import { useExtensionStore, useAIStore } from './lib/stores'
@@ -305,20 +327,21 @@ import { useExtensionStore, useAIStore } from './lib/stores'
 function MyComponent() {
   const { preferences, updatePreferences } = useExtensionStore()
   const { conversations, createConversation } = useAIStore()
-  
+
   // React to state changes automatically
   return <div>Current theme: {preferences?.theme}</div>
 }
 ```
 
 ### AI Chat Integration
+
 ```typescript
 // Full AI chat interface
 import { AIChatPanel } from './components/ai-chat-panel'
 
 function Popup() {
   return (
-    <AIChatPanel 
+    <AIChatPanel
       selectedText="Pre-fill with selected text"
       onResult={(result) => console.log(result)}
     />
@@ -327,13 +350,14 @@ function Popup() {
 ```
 
 ### Quick AI Actions
+
 ```typescript
 // Instant AI processing
 import { AIQuickActions } from './components/ai-quick-actions'
 
 function SidePanel() {
   return (
-    <AIQuickActions 
+    <AIQuickActions
       selectedText="Text to process"
       onResult={(result) => handleResult(result)}
     />
@@ -342,6 +366,7 @@ function SidePanel() {
 ```
 
 ### Payment & Subscription System
+
 ```typescript
 // Initialize payment system
 import { usePaymentActions } from './lib/stores/payment-store'
@@ -362,18 +387,19 @@ const checkoutUrl = await createCheckout('pro', 'monthly')
 ```
 
 ### Feature Gates & Usage Limits
+
 ```typescript
 // Using feature gates
 import { FeatureGate, useFeatureGate } from './lib/utils/feature-gates'
 
 function MyComponent() {
   const { hasAccess, requireAccess } = useFeatureGate('ai_requests')
-  
+
   const handleAIRequest = async () => {
     await requireAccess() // Throws if no access
     // Process AI request...
   }
-  
+
   return (
     <FeatureGate featureId="ai_requests">
       <button onClick={handleAIRequest}>
@@ -385,13 +411,14 @@ function MyComponent() {
 ```
 
 ### HTTP Requests with ky
+
 ```typescript
 // Using improved base service
 class MyService extends ImprovedBaseService {
   constructor() {
     super('https://api.example.com')
   }
-  
+
   async getData() {
     return await this.get<DataType>('/endpoint')
   }
@@ -399,21 +426,24 @@ class MyService extends ImprovedBaseService {
 ```
 
 ### Content Script Integration
+
 ```typescript
 // Get selected text from active tab
 const response = await chrome.tabs.sendMessage(tabId, {
-  type: "GET_SELECTED_TEXT"
+  type: 'GET_SELECTED_TEXT'
 })
 ```
 
 ## AI Features
 
 ### 🤖 **Multi-Provider Support**
+
 - **OpenAI** - GPT-4o, GPT-4o-mini, GPT-3.5-turbo
 - **Anthropic Claude** - Claude-3.5-sonnet, Claude-3.5-haiku, Claude-3-opus
 - **Custom Providers** - Easy integration with any AI API
 
 ### ⚡ **Quick Actions**
+
 - **Summarize** - Instant text summarization
 - **Translate** - Multi-language translation
 - **Explain** - Simple explanations of complex text
@@ -422,6 +452,7 @@ const response = await chrome.tabs.sendMessage(tabId, {
 - **Keyword Extraction** - Key terms and phrases
 
 ### 💬 **Full Chat Interface**
+
 - **Conversation Management** - Multiple chat sessions
 - **Message History** - Persistent conversations
 - **Streaming Support** - Real-time AI responses
@@ -429,6 +460,7 @@ const response = await chrome.tabs.sendMessage(tabId, {
 - **Copy & Share** - Easy result sharing
 
 ### 🔧 **Developer Friendly**
+
 - **Type Safe** - Full TypeScript definitions
 - **Extensible** - Easy to add new AI features
 - **Error Handling** - Robust error management
@@ -438,6 +470,7 @@ const response = await chrome.tabs.sendMessage(tabId, {
 ## 💰 Payment & Monetization Features
 
 ### 🔐 **Subscription Management**
+
 - **Multiple Plans** - Freemium, Pro, Enterprise tiers
 - **Flexible Billing** - Monthly/yearly with auto-discounts
 - **Trial Support** - Free trials with automatic conversion
@@ -445,6 +478,7 @@ const response = await chrome.tabs.sendMessage(tabId, {
 - **Billing Portal** - Self-service billing management
 
 ### 📊 **Usage Tracking & Limits**
+
 - **Real-time Monitoring** - Live usage tracking
 - **Feature-based Limits** - AI requests, conversations, file uploads
 - **Usage Analytics** - Detailed usage reports
@@ -452,6 +486,7 @@ const response = await chrome.tabs.sendMessage(tabId, {
 - **Grace Periods** - Soft limits with warnings
 
 ### 🛡️ **License & Security**
+
 - **JWT-based Licenses** - Cryptographically signed licenses
 - **Offline Validation** - Works without internet connection
 - **Feature Gates** - Secure feature access control
@@ -459,6 +494,7 @@ const response = await chrome.tabs.sendMessage(tabId, {
 - **Extension-specific** - Prevents license sharing
 
 ### 🎨 **Payment UI Components**
+
 - **Upgrade Modal** - Beautiful pricing comparison
 - **Usage Tracker** - Visual usage dashboards
 - **Subscription Status** - Billing management interface
@@ -466,6 +502,7 @@ const response = await chrome.tabs.sendMessage(tabId, {
 - **Trial Warnings** - Automatic expiration reminders
 
 ### 🏗️ **Architecture Benefits**
+
 - **API Proxy Approach** - Secure backend integration
 - **Scalable Backend** - Handle millions of users
 - **Real-time Sync** - Instant subscription updates
@@ -526,6 +563,7 @@ pnpm build
 ### Version Management
 
 Update version in three places:
+
 - `package.json`
 - `manifest.json`
 - `lib/utils/constants.ts`
@@ -535,16 +573,19 @@ Update version in three places:
 ### Common Issues
 
 **Extension not loading:**
+
 - Check manifest.json syntax
 - Verify all file paths exist
 - Check console for build errors
 
 **Background script not responding:**
+
 - Check service worker in Chrome DevTools
 - Verify message types match constants
 - Check async/await usage
 
 **UI not updating:**
+
 - Verify React hooks are used correctly
 - Check message passing between components
 - Ensure state updates are immutable
@@ -575,24 +616,34 @@ MIT License - see LICENSE file for details.
 ## 📚 Documentation & Support
 
 ### 📖 Getting Started
-- 🚀 [**Onboarding Guide**](./docs/onboarding-guide.md) - Complete setup and customization guide
-- ⚡ [**Quick Reference**](./docs/quick-reference.md) - Commands, patterns, and common tasks
-- 🛠 [**Scripts Documentation**](./scripts/README.md) - Automation scripts reference
+
+- 🚀 [**Onboarding Guide**](./docs/onboarding-guide.md) - Complete setup and
+  customization guide
+- ⚡ [**Quick Reference**](./docs/quick-reference.md) - Commands, patterns, and
+  common tasks
+- 🛠 [**Scripts Documentation**](./scripts/README.md) - Automation scripts
+  reference
 
 ### 🏗️ Architecture & Design
-- 🏛️ [Chrome Extension Architecture](./docs/chrome-extension-architecture-patterns.md)
+
+- 🏛️
+  [Chrome Extension Architecture](./docs/chrome-extension-architecture-patterns.md)
 - 🔧 [Separation of Concerns Guide](./docs/separation-of-concerns-guide.md)
 - 🌐 [CORS Handling Strategies](./docs/cors-handling-strategies.md)
-- 🔒 [Security & Authentication Patterns](./docs/authentication-security-patterns.md)
+- 🔒
+  [Security & Authentication Patterns](./docs/authentication-security-patterns.md)
 - 🏗️ [Backend Architecture Guide](./docs/backend-architecture-guide.md)
 
 ### 🚀 Advanced Topics
+
 - 📊 [Data Synchronization Patterns](./docs/data-synchronization-patterns.md)
 - 🚀 [Deployment & Scaling Strategies](./docs/deployment-scaling-strategies.md)
 - 💡 [Development Best Practices](./docs/development-best-practices.md)
 
 ### 🆘 Support Channels
-- 📖 [Chrome Extension Documentation](https://developer.chrome.com/docs/extensions/)
+
+- 📖
+  [Chrome Extension Documentation](https://developer.chrome.com/docs/extensions/)
 - 🐛 [Issue Tracker](https://github.com/your-repo/issues)
 - 💬 [GitHub Discussions](https://github.com/your-repo/discussions)
 - 📧 [Email Support](mailto:support@yourextension.com)
